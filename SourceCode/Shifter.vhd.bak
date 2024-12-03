@@ -1,0 +1,34 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity Shifter is
+    Generic ( N : natural := 64 );  -- Width of the data
+    Port (
+        A : in std_logic_vector(N-1 downto 0);  -- Operand to shift
+        B : in std_logic_vector(N-1 downto 0);  -- Shift amount
+        Func : in std_logic_vector(1 downto 0);  -- Shift function (00=logical, 01=arithmetic, etc.)
+        Result : out std_logic_vector(N-1 downto 0)  -- Shifted result
+    );
+end entity Shifter;
+
+architecture behavioral of Shifter is
+begin
+    process(A, B, Func)
+    begin
+        case Func is
+            -- Logical shift left
+            when "00" => 
+                Result <= A sll to_integer(unsigned(B));  -- Shift left logical
+            -- Logical shift right
+            when "01" => 
+                Result <= A srl to_integer(unsigned(B));  -- Shift right logical
+            -- Arithmetic shift right
+            when "10" => 
+                Result <= A sra to_integer(unsigned(B));  -- Arithmetic shift right
+            -- No operation for undefined functions (optional handling)
+            when others => 
+                Result <= (others => '0');  -- Default case
+        end case;
+    end process;
+end architecture behavioral;

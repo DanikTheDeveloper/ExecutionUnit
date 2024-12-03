@@ -1,0 +1,53 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+architecture CLA of Adder is
+    signal P, G : std_logic_vector(N-1 downto 0); -- Propagate and Generate signals
+    signal C    : std_logic_vector(N downto 0);   -- Carry vector
+begin
+    -- Initial carry-in
+    C(0) <= Cin;
+
+    -- Generate Propagate and Generate signals
+    gen_pg: for i in 0 to N-1 generate
+        begin
+            P(i) <= A(i) xor B(i);  -- Propagate signals
+            G(i) <= A(i) and B(i);  -- Generate signals
+        end generate;
+
+    -- Recursive process to calculate carry signals
+    process (P, G, Cin)
+        procedure compute_carry(i: integer) is
+            variable propagate_chain : std_logic := '1';
+            variable carry_value : std_logic;
+        begin
+            if i = 0 then
+                carry_value := Cin;
+            else
+                carry_value := G(i-1);
+                for j in i-1 downto 0 loop
+                    propagate_chain := propagate_chain and P(j);
+                    carry_value := carry_value or (propagate_chain and G(j-1));
+                end loop;
+                carry_value := carry_value or (propagate_chain and Cin);
+            end if;
+            C(i) <= carry_value;
+        end procedure;
+
+        -- Loop through each carry bit recursively
+        for i in 1 to N loop
+            compute_carry(i);
+        end loop;
+    end process;
+
+    -- Generate sum signals
+    gen_sum: for i in 0 to N-1 generate
+        begin
+            S(i) <= P(i) xor C(i);
+        end generate;
+
+    -- Output the final carry and overflow
+    Cout <= C(N);
+    Ovfl <= C(N) xor C(N-1);
+end architecture CLA;

@@ -1,0 +1,905 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/20.1
+Eadder
+Z0 w1733010874
+Z1 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
+Z2 DPx10 cycloneive 20 cycloneive_atom_pack 0 22 WOh:M[al;oVzG5c`<He>D0
+Z3 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+Z6 DPx10 cycloneive 21 cycloneive_components 0 22 zGMDhP>8e@2k@f0e<PY]k2
+!i122 102
+Z7 dU:/350/dpremake/Simulation
+Z8 8U:/350/dpremake/Simulation/questa/FLA.vho
+Z9 FU:/350/dpremake/Simulation/questa/FLA.vho
+l0
+L78 1
+V<UdzK=FJlX^6];hmAV3g51
+!s100 fzJ=5`Xl`cN44VYHbAC:81
+Z10 OV;C;2020.1;71
+32
+Z11 !s110 1733117964
+!i10b 1
+Z12 !s108 1733117963.000000
+Z13 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/350/dpremake/Simulation/questa/FLA.vho|
+!s107 U:/350/dpremake/Simulation/questa/FLA.vho|
+!i113 1
+Z14 o-work work -2002 -explicit
+Z15 tExplicit 1 CvgOpt 0
+Astructure
+R1
+R2
+R3
+R4
+R5
+R6
+DEx4 work 5 adder 0 22 <UdzK=FJlX^6];hmAV3g51
+!i122 102
+l1225
+L287 17016
+VajVJ^dRl0cMTdf6U<zj1L1
+!s100 c^V[c_SCEicXVSPljRfPI2
+R10
+32
+R11
+!i10b 1
+R12
+R13
+Z16 !s107 U:/350/dpremake/Simulation/questa/FLA.vho|
+!i113 1
+R14
+R15
+Abehaviour
+Z17 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+R4
+R5
+Z18 DEx4 work 5 adder 0 22 F`j<hDSFl3WR0NT5YW;fm0
+!i122 94
+l23
+L16 35
+V>P6TH0@@5V8jXa[F`BP?43
+!s100 WRBc6z>Q0nikS7b01SeON3
+R10
+33
+!s110 1733115767
+!i10b 1
+!s108 1733115767.000000
+!s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/Adder.vhd|
+!s107 U:/350/dpremake/SourceCode/Adder.vhd|
+!i113 1
+Z19 o-work work -2008 -explicit
+R15
+FU:/350/dpremake/SourceCode/Adder.vhd
+w1733111515
+8U:/350/dpremake/SourceCode/Adder.vhd
+Ahierarchical
+Z20 DEx4 work 9 csa_block 0 22 fAO_KT10SFcW4ND5?e1E]0
+Z21 DEx4 work 5 gpnet 0 22 0]FI@M7e?CzAXNEVf^PR82
+Z22 DPx4 ieee 9 math_real 0 22 gNk<PdFJ<XNPcfef`f?Z81
+R17
+R4
+R5
+DEx4 work 5 adder 0 22 d:N0c=7n<;GA@6b42@6D63
+!i122 40
+l25
+L17 49
+V4XPTbCX<X?WblFL4fAbfD3
+!s100 7lAkLFLCoh6RBe5hhTlac0
+R10
+33
+!s110 1733025803
+!i10b 1
+Z23 !s108 1733025803.000000
+!s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/CSA/Adder.vhd|
+!s107 U:/350/dpremake/SourceCode/CSA/Adder.vhd|
+!i113 1
+R19
+R15
+FU:/350/dpremake/SourceCode/CSA/Adder.vhd
+w1733025364
+8U:/350/dpremake/SourceCode/CSA/Adder.vhd
+Aclarecursive
+R18
+Z24 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+R4
+Z25 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+8U:/Ensc350/DP1/SourceCode/CLArecursive.vhd
+FU:/Ensc350/DP1/SourceCode/CLArecursive.vhd
+l8
+L5
+V7BbmkU:NQSOOFH1`Y@YDD1
+!s100 GKkOc[Afdf4g9d=TWMN0a1
+Z26 OV;C;10.5b;63
+33
+!s110 1732243655
+!i10b 1
+!s108 1732243655.000000
+!s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/Ensc350/DP1/SourceCode/CLArecursive.vhd|
+!s107 U:/Ensc350/DP1/SourceCode/CLArecursive.vhd|
+!i113 1
+R19
+R15
+Z27 dU:/Ensc350/DP1/Simulation
+w1732237217
+Acskipa
+Z28 DEx4 work 5 adder 0 22 eoR>P3P7B`NXSU0n`_6:@2
+R17
+R4
+R5
+!i122 156
+8U:/Ensc350/DP1/SourceCode/CSA.vhd
+FU:/Ensc350/DP1/SourceCode/CSA.vhd
+l14
+L5 81
+VHL=L_@RaIP<[T>V[lAi<C1
+!s100 961SMOYcP:E:DzWSLofJS2
+R10
+32
+!s110 1731637131
+!i10b 1
+!s108 1731637131.000000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/Ensc350/DP1/SourceCode/CSA.vhd|
+!s107 U:/Ensc350/DP1/SourceCode/CSA.vhd|
+!i113 1
+R14
+R15
+Z29 w1731035646
+R27
+Acla
+R28
+R17
+R4
+R5
+!i122 156
+8U:/Ensc350/DP1/SourceCode/CLA.vhd
+FU:/Ensc350/DP1/SourceCode/CLA.vhd
+l8
+L5 147
+Vk17fH?GcjBd2e7YZkz=QI0
+!s100 L?_zC@A^^VDV5F1IIj6O32
+R10
+32
+!s110 1731637130
+!i10b 1
+!s108 1731637130.000000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/Ensc350/DP1/SourceCode/CLA.vhd|
+!s107 U:/Ensc350/DP1/SourceCode/CLA.vhd|
+!i113 1
+R14
+R15
+R29
+R27
+Eandgate
+Z30 w1730849257
+R17
+R4
+R5
+!i122 85
+R7
+Z31 8U:/350/dpremake/SourceCode/AndGate.vhd
+Z32 FU:/350/dpremake/SourceCode/AndGate.vhd
+l0
+L5 1
+VU<[oBLIkLhCJ1jm2:5@4^0
+!s100 m[ZkV6XbP@f]<V4mTSLSe1
+R10
+33
+Z33 !s110 1733115473
+!i10b 1
+Z34 !s108 1733115473.000000
+Z35 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/AndGate.vhd|
+Z36 !s107 U:/350/dpremake/SourceCode/AndGate.vhd|
+!i113 1
+R19
+R15
+Abehaviour
+R17
+R4
+R5
+DEx4 work 7 andgate 0 22 U<[oBLIkLhCJ1jm2:5@4^0
+!i122 85
+l16
+L13 23
+VOZf>FUe96k[D^o;4LAi050
+!s100 [8SXZ;F6^?MVV8D138lOM3
+R10
+33
+R33
+!i10b 1
+R34
+R35
+R36
+!i113 1
+R19
+R15
+Eblan
+Z37 w1731028306
+R17
+R4
+R5
+!i122 90
+R7
+Z38 8U:/350/dpremake/SourceCode/BLAN.vhd
+Z39 FU:/350/dpremake/SourceCode/BLAN.vhd
+l0
+L5 1
+Vd=`gc`C^_6nj>kKG:2U^V0
+!s100 ULCBoo2eQ?II[2TLQ?JM<0
+R10
+33
+Z40 !s110 1733115476
+!i10b 1
+Z41 !s108 1733115476.000000
+Z42 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/BLAN.vhd|
+Z43 !s107 U:/350/dpremake/SourceCode/BLAN.vhd|
+!i113 1
+R19
+R15
+Afla
+Z44 DEx4 work 8 lacolumn 0 22 l9h72@f`lAG2K`;RSjk_C2
+R17
+R4
+R5
+Z45 DEx4 work 4 blan 0 22 d=`gc`C^_6nj>kKG:2U^V0
+!i122 90
+l16
+L13 12
+VXP[9dakjJdBD1Q4n]O<5N3
+!s100 f[J]HgNSDXCnVMjoKfdYL3
+R10
+33
+R40
+!i10b 1
+R41
+R42
+R43
+!i113 1
+R19
+R15
+Ecnet
+Z46 w1732242139
+R17
+R4
+R5
+!i122 86
+R7
+Z47 8U:/350/dpremake/SourceCode/Cnet.vhd
+Z48 FU:/350/dpremake/SourceCode/Cnet.vhd
+l0
+L5 1
+VP8jLF59T>EfA37lJ3a5B73
+!s100 UTDk76[^l?hf7g<AhC[N31
+R10
+33
+Z49 !s110 1733115474
+!i10b 1
+Z50 !s108 1733115474.000000
+Z51 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/Cnet.vhd|
+Z52 !s107 U:/350/dpremake/SourceCode/Cnet.vhd|
+!i113 1
+R19
+R15
+Astructural
+R45
+R17
+R4
+R5
+DEx4 work 4 cnet 0 22 P8jLF59T>EfA37lJ3a5B73
+!i122 86
+l18
+L14 17
+V[;OBi:E8iTFKiXKg75bBm1
+!s100 Ziell`3SH2c9Og64LOONi1
+R10
+33
+R49
+!i10b 1
+R50
+R51
+R52
+!i113 1
+R19
+R15
+Cconfig_cla
+Z53 eTBAdder
+Z54 aBehaviour
+R18
+Z55 DAx4 work 7 tbadder 9 behaviour 22 Mej`?6`9^VG1RgWl3FGbm3
+R24
+R4
+R25
+Z56 DEx4 work 7 tbadder 0 22 ii`Jdh7WAfSn0e7HVJC<32
+w1732235804
+R27
+Z57 8U:/Ensc350/DP1/Simulation/DP1Config.vhd
+Z58 FU:/Ensc350/DP1/Simulation/DP1Config.vhd
+l0
+L11
+Vln0fEadGLFNW>6Uf^f53:3
+!s100 8oD7:G]89n577zE4eCk:G3
+R26
+33
+!s110 1732243659
+!i10b 1
+!s108 1732243658.000000
+Z59 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/Ensc350/DP1/Simulation/DP1Config.vhd|
+Z60 !s107 U:/Ensc350/DP1/Simulation/DP1Config.vhd|
+!i113 1
+R19
+R15
+Cconfig_csa
+R53
+R54
+R18
+R55
+R24
+R4
+R25
+R56
+Z61 w1732243788
+R27
+R57
+R58
+l0
+L11
+VM213@:NbjN_d5]`IcXB5i2
+!s100 ^8f[fAlj<_KCTiCE]KJMz1
+R26
+33
+Z62 !s110 1732243945
+!i10b 1
+Z63 !s108 1732243945.000000
+R59
+R60
+!i113 1
+R19
+R15
+Cconfig_fla
+R53
+R54
+R18
+R55
+R24
+R4
+R25
+R56
+R61
+R27
+R57
+R58
+l0
+L20
+VzQXUOT25=P]j^;cWjEOYY2
+!s100 G?A1>8bU`[O_6?WFS=[Z;3
+R26
+33
+R62
+!i10b 1
+R63
+R59
+R60
+!i113 1
+R19
+R15
+Cconfig_ripple
+R53
+R54
+R18
+R55
+R24
+R4
+R25
+R56
+R61
+R27
+R57
+R58
+l0
+L2
+V[]ULne5TR0XUNB2[WJMJ41
+!s100 3T:dDb7nPhM<S7G`hD_<41
+R26
+33
+R62
+!i10b 1
+R63
+R59
+R60
+!i113 1
+R19
+R15
+Ecsa_block
+Z64 w1733025399
+R22
+R17
+R4
+R5
+!i122 41
+R7
+Z65 8U:/350/dpremake/SourceCode/CSA/CSA_Block.vhd
+Z66 FU:/350/dpremake/SourceCode/CSA/CSA_Block.vhd
+l0
+L8 1
+VfAO_KT10SFcW4ND5?e1E]0
+!s100 L??VB9=1cnR<R`5jMQh6m3
+R10
+33
+Z67 !s110 1733025804
+!i10b 1
+R23
+Z68 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/CSA/CSA_Block.vhd|
+Z69 !s107 U:/350/dpremake/SourceCode/CSA/CSA_Block.vhd|
+!i113 1
+R19
+R15
+Ahierarchical
+Z70 DEx4 work 3 mux 0 22 9G5M`nl_5BLNoI?NWj@Yd1
+Z71 DEx4 work 12 fa_skipcarry 0 22 dDKc4=Kz>[78_D@C3f4f33
+Z72 DEx4 work 8 skipcnet 0 22 mbzN4_j7bJTGNQmKlAJnI1
+R22
+R17
+R4
+R5
+R20
+!i122 41
+l24
+L19 50
+V6_ioO>?LCD0>gec8DhC5N0
+!s100 M]^RLX=D1nEe]gi0AD0Y03
+R10
+33
+R67
+!i10b 1
+R23
+R68
+R69
+!i113 1
+R19
+R15
+Efa_skipcarry
+Z73 w1733024421
+R22
+R17
+R4
+R5
+!i122 42
+R7
+Z74 8U:/350/dpremake/SourceCode/CSA/FA_SkipCarry.vhd
+Z75 FU:/350/dpremake/SourceCode/CSA/FA_SkipCarry.vhd
+l0
+L7 1
+VdDKc4=Kz>[78_D@C3f4f33
+!s100 0az_:eAN?Q?hZNW^0@?9G2
+R10
+33
+R67
+!i10b 1
+Z76 !s108 1733025804.000000
+Z77 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/CSA/FA_SkipCarry.vhd|
+Z78 !s107 U:/350/dpremake/SourceCode/CSA/FA_SkipCarry.vhd|
+!i113 1
+R19
+R15
+Abehavior
+R22
+R17
+R4
+R5
+R71
+!i122 42
+l17
+L16 5
+Vg322>]M;:99OEHIcjY6S^3
+!s100 6iRCh<a784Vd8gCiXDYbR3
+R10
+33
+R67
+!i10b 1
+R76
+R77
+R78
+!i113 1
+R19
+R15
+Egpnet
+Z79 w1730857244
+R17
+R4
+R5
+!i122 87
+R7
+Z80 8U:/350/dpremake/SourceCode/GPnet.vhd
+Z81 FU:/350/dpremake/SourceCode/GPnet.vhd
+l0
+L5 1
+V0]FI@M7e?CzAXNEVf^PR82
+!s100 >2=RAfKDQUWfi]VQzB4Xd0
+R10
+33
+R49
+!i10b 1
+R50
+Z82 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/GPnet.vhd|
+Z83 !s107 U:/350/dpremake/SourceCode/GPnet.vhd|
+!i113 1
+R19
+R15
+Abehaviour
+R17
+R4
+R5
+R21
+!i122 87
+l14
+Z84 L13 6
+V:08gS8=[7bb<C>ed5PFU62
+!s100 IUXI3^1E<EO_nVVE<8I]L0
+R10
+33
+R49
+!i10b 1
+R50
+R82
+R83
+!i113 1
+R19
+R15
+Egtree
+Z85 w1732242131
+R17
+R4
+R5
+!i122 88
+R7
+Z86 8U:/350/dpremake/SourceCode/Gtree.vhd
+Z87 FU:/350/dpremake/SourceCode/Gtree.vhd
+l0
+L5 1
+Vj_T9Zdd7Bk;gnNI[=`7=i1
+!s100 Hz[2OFW8c@5D@[54PgR@m0
+R10
+33
+Z88 !s110 1733115475
+!i10b 1
+R50
+Z89 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/Gtree.vhd|
+Z90 !s107 U:/350/dpremake/SourceCode/Gtree.vhd|
+!i113 1
+R19
+R15
+Arecursive
+R17
+R4
+R5
+DEx4 work 5 gtree 0 22 j_T9Zdd7Bk;gnNI[=`7=i1
+!i122 88
+l14
+R84
+V9`96Z06CS8T=Bz5kX>NeS0
+!s100 VHkMk:P1iGWc;cJ;nX<5Y2
+R10
+33
+R88
+!i10b 1
+R50
+R89
+R90
+!i113 1
+R19
+R15
+Ehard_block
+R0
+R1
+R2
+R3
+R4
+R5
+R6
+!i122 102
+R7
+R8
+R9
+l0
+L35 1
+Vlmii]zleeR6Qln=@YIVJi2
+!s100 >mXi5[`cD`bFC`UBKA<om3
+R10
+32
+Z91 !s110 1733117963
+!i10b 1
+R12
+R13
+R16
+!i113 1
+R14
+R15
+Astructure
+R1
+R2
+R3
+R4
+R5
+R6
+Z92 DEx4 work 10 hard_block 0 22 lmii]zleeR6Qln=@YIVJi2
+!i122 102
+l65
+Z93 L51 20
+Z94 V=_0GiacKDWo;CBD3Z7?5c1
+Z95 !s100 [5;Wd8QGQ>@2NGoJ1I]Y43
+R10
+32
+R91
+!i10b 1
+R12
+R13
+R16
+!i113 1
+R14
+R15
+Elacolumn
+Z96 w1731028300
+R17
+R4
+R5
+!i122 89
+R7
+Z97 8U:/350/dpremake/SourceCode/LAColumn.vhd
+Z98 FU:/350/dpremake/SourceCode/LAColumn.vhd
+l0
+L5 1
+Vl9h72@f`lAG2K`;RSjk_C2
+!s100 @`RazOAiUWQH^==hJ2;JO1
+R10
+33
+R40
+!i10b 1
+Z99 !s108 1733115475.000000
+Z100 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/LAColumn.vhd|
+Z101 !s107 U:/350/dpremake/SourceCode/LAColumn.vhd|
+!i113 1
+R19
+R15
+Arecursive
+R17
+R4
+R5
+R44
+!i122 89
+l17
+L14 25
+V^4J9XL<L6ZdgoP4[99HRR2
+!s100 H:E^[nkhz=<Od=@_Je:8Y3
+R10
+33
+R40
+!i10b 1
+R99
+R100
+R101
+!i113 1
+R19
+R15
+Emux
+Z102 w1733024426
+R17
+R4
+R5
+!i122 44
+R7
+Z103 8U:/350/dpremake/SourceCode/CSA/Mux.vhd
+Z104 FU:/350/dpremake/SourceCode/CSA/Mux.vhd
+l0
+L5 1
+V9G5M`nl_5BLNoI?NWj@Yd1
+!s100 M:1T9BklVOKTb;UM1]8C21
+R10
+33
+Z105 !s110 1733025805
+!i10b 1
+Z106 !s108 1733025805.000000
+Z107 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/CSA/Mux.vhd|
+Z108 !s107 U:/350/dpremake/SourceCode/CSA/Mux.vhd|
+!i113 1
+R19
+R15
+Abehaviour
+R17
+R4
+R5
+R70
+!i122 44
+l15
+L14 12
+VH@Ieh<6T?CV[OGEcF[IaZ1
+!s100 E3_d3d2;nG8f@QP?og^;>2
+R10
+33
+R105
+!i10b 1
+R106
+R107
+R108
+!i113 1
+R19
+R15
+Eptree
+Z109 w1730863650
+R17
+R4
+R5
+!i122 91
+R7
+Z110 8U:/350/dpremake/SourceCode/Ptree.vhd
+Z111 FU:/350/dpremake/SourceCode/Ptree.vhd
+l0
+L5 1
+VD>nT=RI>?Qe4f@Ca`oPRW2
+!s100 RJdC?oNL8bOVKc70gdUbo1
+R10
+33
+Z112 !s110 1733115477
+!i10b 1
+R41
+Z113 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/Ptree.vhd|
+Z114 !s107 U:/350/dpremake/SourceCode/Ptree.vhd|
+!i113 1
+R19
+R15
+Arecursive
+R17
+R4
+R5
+DEx4 work 5 ptree 0 22 D>nT=RI>?Qe4f@Ca`oPRW2
+!i122 91
+l15
+L13 22
+VgXj7LdiS6fCG6gBd1X[]n0
+!s100 d`P]hV83fW]DGe5P8gVYF2
+R10
+33
+R112
+!i10b 1
+R41
+R113
+R114
+!i113 1
+R19
+R15
+Eskipcnet
+Z115 w1733024429
+R17
+R4
+R5
+!i122 45
+R7
+Z116 8U:/350/dpremake/SourceCode/CSA/SkipCNet.vhd
+Z117 FU:/350/dpremake/SourceCode/CSA/SkipCNet.vhd
+l0
+L5 1
+VmbzN4_j7bJTGNQmKlAJnI1
+!s100 :km99MX:KXT3<mjfJ^G<L3
+R10
+33
+R105
+!i10b 1
+R106
+Z118 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/CSA/SkipCNet.vhd|
+Z119 !s107 U:/350/dpremake/SourceCode/CSA/SkipCNet.vhd|
+!i113 1
+R19
+R15
+Abehaviour
+R17
+R4
+R5
+R72
+!i122 45
+l13
+L12 4
+V[fCI2Lk^jG4H`2FJ_lbe?1
+!s100 Ida>jXajBiCP0mg_2@hZ>3
+R10
+33
+R105
+!i10b 1
+R106
+R118
+R119
+!i113 1
+R19
+R15
+Esnet
+Z120 w1732242137
+R17
+R4
+R5
+!i122 92
+R7
+Z121 8U:/350/dpremake/SourceCode/Snet.vhd
+Z122 FU:/350/dpremake/SourceCode/Snet.vhd
+l0
+L5 1
+V3XfRZKN1[?[[cGOdTk]Zg2
+!s100 jz2zb>kecal_T1<2MXT[>3
+R10
+33
+R112
+!i10b 1
+Z123 !s108 1733115477.000000
+Z124 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/SourceCode/Snet.vhd|
+Z125 !s107 U:/350/dpremake/SourceCode/Snet.vhd|
+!i113 1
+R19
+R15
+Abehaviour
+R17
+R4
+R5
+DEx4 work 4 snet 0 22 3XfRZKN1[?[[cGOdTk]Zg2
+!i122 92
+l15
+L14 6
+VI4@]FLXeV186hdbi0zRn[3
+!s100 W2_5`Z4@i1_LY@EbAjK0Y1
+R10
+33
+R112
+!i10b 1
+R123
+R124
+R125
+!i113 1
+R19
+R15
+Etbadder
+Z126 w1732242129
+R17
+R4
+R5
+!i122 101
+R7
+Z127 8U:/350/dpremake/Simulation/TBadder.vhd
+Z128 FU:/350/dpremake/Simulation/TBadder.vhd
+l0
+L6 1
+Vii`Jdh7WAfSn0e7HVJC<32
+!s100 Ei7mi6S>enX[oGL[?3c3J3
+R10
+33
+Z129 !s110 1733117962
+!i10b 1
+Z130 !s108 1733117961.000000
+Z131 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|U:/350/dpremake/Simulation/TBadder.vhd|
+Z132 !s107 U:/350/dpremake/Simulation/TBadder.vhd|
+!i113 1
+R19
+R15
+Abehaviour
+R17
+R4
+R5
+R56
+!i122 101
+l32
+L9 92
+VMej`?6`9^VG1RgWl3FGbm3
+!s100 >z7_2m=8mV`>o=L530<2Z0
+R10
+33
+R129
+!i10b 1
+R130
+R131
+R132
+!i113 1
+R19
+R15

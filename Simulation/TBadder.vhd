@@ -1,0 +1,100 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use std.textio.all;
+
+entity TBAdder is
+end TBAdder;
+
+architecture Behaviour of TBAdder is
+    constant N : natural := 64;
+
+    -- Component Declaration
+    component Adder is
+        Generic (N : natural := 64);
+        Port (
+            A, B : in std_logic_vector(N-1 downto 0);
+            S    : out std_logic_vector(N-1 downto 0);
+            Cin  : in std_logic;
+            Cout : out std_logic;
+            Ovfl : out std_logic
+        );
+    end component;
+
+    -- Signals to connect with the Adder component
+    signal TBA, TBB, TBS         : std_logic_vector(N-1 downto 0);
+    signal TBCin, TBCout, TBOvfl : std_logic;
+
+    -- File Handling
+	Constant	TestVectorFile : string := "TestVectors/Adder00.tvs";
+    	file 		VectorFile : text;
+
+begin
+    -- Instantiate the DUT (Device Under Test)
+    DUT: Adder
+        port map (
+            A => TBA,
+            B => TBB,
+            S => TBS,
+            Cin => TBCin,
+            Cout => TBCout,
+            Ovfl => TBOvfl
+        );
+
+    -- Test Process
+  test:   process
+        variable LineBuffer : line;
+	variable A_var, B_var, S_var : std_logic_vector(N-1 downto 0);
+        variable Cin_str, Cout_str, Ovfl_str : std_logic;
+        variable Index : integer := 1;
+	variable expected_S : std_logic_vector(N-1 downto 0);
+        variable expected_Cout, expected_Ovfl : std_logic;
+        constant PreStimTime : time := 1 ns;
+        constant PostStimTime : time := 1111 ns;
+
+    begin
+	FILE_OPEN( VectorFile, TestVectorFile, read_mode );
+	report "dudes ... I'm here" & TestVectorFile; -- Courtesy of the professor
+
+        -- Read and apply test vectors
+        while not ENDFILE (VectorFile) loop
+            readline(VectorFile, LineBuffer);
+
+        -- Read values from the file
+	hread(LineBuffer, A_var);
+	hread(LineBuffer, B_var);
+	read(LineBuffer, Cin_str);
+	hread(LineBuffer, S_var);
+	read(LineBuffer, Cout_str);
+	read(LineBuffer, Ovfl_str);
+
+	TBA <= A_var;
+        TBB <= B_var;
+	expected_S := S_var;
+        TBCin <= Cin_str;
+
+        wait for PreStimTime;
+
+            -- Determine expected Cout and Ovfl values
+	expected_Cout := Cout_str;
+	expected_Ovfl := Ovfl_str;
+
+            -- Validate the outputs
+            assert (TBS = expected_S) and
+                   (TBCout = expected_Cout) and
+                   (TBOvfl = expected_Ovfl)
+                report "Test failed at index: " & integer'image(Index)
+                severity error;
+
+            -- Increment test case index
+            Index := Index + 1;
+            wait for PostStimTime;
+        end loop;
+
+        report "All tests completed. Total vectors: " & integer'image(Index - 1);
+        wait;
+
+	FILE_CLOSE(VectorFile);
+        WAIT;
+    end process;
+end Behaviour;

@@ -1,0 +1,17 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity PTree is
+    Generic ( M : natural := 64 );
+    Port (
+        P : in std_logic_vector(M-1 downto 0);
+        BP : out std_logic;
+    );
+end entity PTree;
+
+architecture recursiveP of PTree is
+begin
+
+
+end architecture recursiveP;
