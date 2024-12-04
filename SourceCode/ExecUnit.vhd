@@ -12,7 +12,7 @@ entity ExecUnit is
         AddnSub      : in std_logic := '0';                -- Add/Sub control
         ExtWord      : in std_logic := '0';                -- Extend word control
         Y            : out std_logic_vector(N-1 downto 0); -- Final result
-        AltBu, Zero : out std_logic  -- Flags, AltB, 
+        AltB, AltBu, Zero : out std_logic  -- Flags, AltB, 
     );
 end entity ExecUnit;
 
@@ -116,7 +116,7 @@ architecture hierarchical of ExecUnit is
         Generic ( N : natural := 64 );
         Port (
 			  A, B : in std_logic_vector(N-1 downto 0);
-			  LessThan, Equal    : out std_logic
+			  ALessThanB, Equal    : out std_logic
         );
     end component;
 
@@ -143,7 +143,7 @@ begin
         port map (
             A => A,
 				B => B,
-            LessThan => AltBu
+            ALessThanB => AltBu
         );
 
     -- Arithmetic Block: Add/Sub operations based on FuncClass and AddnSub control
@@ -151,7 +151,7 @@ begin
         generic map ( N => N )
         port map (
             A => A,
-            B => updB,
+            B => updB, -- why not just use B? value of B should not change
             Cin => AddnSub,  -- AddnSub controls add (0) or subtract (1)
             S => arithmetic_result,
             Cout => open,     -- Carry-out (unused for now)

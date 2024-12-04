@@ -6,7 +6,7 @@ entity LogicUnit is
     Port (
         A : in std_logic_vector(N-1 downto 0);  -- Operand A
         B : in std_logic_vector(N-1 downto 0);  -- Operand B
-        Func : in std_logic_vector(1 downto 0);  -- Logic function (00=AND, 01=OR, 10=XOR)
+        Func : in std_logic_vector(1 downto 0);  -- Logic function (01=XOR, 10=OR, 11=AND)
         Result : out std_logic_vector(N-1 downto 0)  -- Logic result
     );
 end entity LogicUnit;
@@ -18,8 +18,10 @@ begin
         case Func is
             -- LUI operation
             when "00" => 
-                    Result(31 downto 0) <= A(19 downto 0) & x"000";  -- Concatenate with 12 zeros
-                    Result(63 downto 32) <= (others => Result(31));  -- Sign-extend bit 31 to 63 downto 32
+                    Result <= B; -- We don't have the instruction (hence we don't have the opcode/immediate) so just do nothing I guess
+						  -- Do we use the value of B?
+						  -- SextI goes to the B register which is an input to the execution unit. Which is a sign extended version of the immediate value.
+						  -- I think that for lui test cases we just need to make B already in its immediate form
             -- XOR operation
             when "01" => 
                     Result <= A xor B;  -- Bitwise XOR

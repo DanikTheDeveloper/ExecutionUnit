@@ -15,9 +15,9 @@ architecture behavioral of ShiftSelector is
 begin
     process (A, B, ShiftFN, Result)
     begin
-        if ShiftFN = '1' then
+        if ShiftFN = '0' then
             Result <= A;
-        elsif ShiftFN = '0' then
+        elsif ShiftFN = '1' then
             Result <= B;
         end if;
     end process;
