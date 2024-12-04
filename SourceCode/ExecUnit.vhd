@@ -111,15 +111,14 @@ architecture hierarchical of ExecUnit is
             Result  : out std_logic_vector(N-1 downto 0)
         );
     end component;
-	 
-    component MagComU is
+
+    component MagCom is
         Generic ( N : natural := 64 );
         Port (
 			  A, B : in std_logic_vector(N-1 downto 0);
-			  ALessThanB, AEqualB    : out std_logic
+			  ALessThanB, AEqualB, ALessThanBU, AEqualBU    : out std_logic
         );
     end component;
-
 	 
     component AndNotGate is
         Generic ( N : natural := 64 );
@@ -138,13 +137,15 @@ begin
             B => updB
         );
 		  
-	MagComU_inst : MagComU
+	MagComU_inst2 : MagCom
         generic map ( N => N )
         port map (
             A => A,
 				B => B,
-            ALessThanB => AltBu,
-				AEqualB => open
+            ALessThanB => AltB,
+				AEqualB => open,
+            ALessThanBU => AltBu,
+				AEqualBU => open
         );
 
     -- Arithmetic Block: Add/Sub operations based on FuncClass and AddnSub control
@@ -225,7 +226,7 @@ begin
     FuncClass_inst : FuncClass_entity
         generic map ( N => N )
         port map (
-            AltB => logic_result,
+            AltB => zeros(N-1 downto 1) & AltB,
             AltBu => zeros(N-1 downto 1) & AltBu,
             logic_result => logic_result,
 				ShiftFN3 => ShiftFN3,
