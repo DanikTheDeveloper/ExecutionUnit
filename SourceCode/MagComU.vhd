@@ -14,11 +14,9 @@ architecture Behaviour of MagComU is
 			signal hiLessThan, loLessThan, hiEqual, loEqual : std_logic;
 
 begin
---    B <= A(0) and A(1) and A(2) and A(3) and A(4) and A(5) and A(6) and A(7) and A(8) and A(9) and A(10) and A(11) and A(12) and A(13) and A(14) and A(15);
-
 RECUR:	if N > 1 generate 
 i1: ENTITY WORK.MagComU generic map ( N => N/2 )
-						port map( A => A(N-1 downto N/2) , B => B((N/2)-1 downto 0) , ALessThanB => hiLessThan, AEqualB => hiEqual);
+						port map( A => A(N-1 downto N/2) , B => B(N-1 downto N/2) , ALessThanB => hiLessThan, AEqualB => hiEqual);
 
 i2: ENTITY WORK.MagComU generic map ( N => N/2 )
 						port map( A => A((N/2)-1 downto 0) , B => B((N/2)-1 downto 0) , ALessThanB => loLessThan, AEqualB => loEqual);

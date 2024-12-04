@@ -116,7 +116,7 @@ architecture hierarchical of ExecUnit is
         Generic ( N : natural := 64 );
         Port (
 			  A, B : in std_logic_vector(N-1 downto 0);
-			  ALessThanB, Equal    : out std_logic
+			  ALessThanB, AEqualB    : out std_logic
         );
     end component;
 
@@ -143,7 +143,8 @@ begin
         port map (
             A => A,
 				B => B,
-            ALessThanB => AltBu
+            ALessThanB => AltBu,
+				AEqualB => open
         );
 
     -- Arithmetic Block: Add/Sub operations based on FuncClass and AddnSub control
@@ -225,7 +226,7 @@ begin
         generic map ( N => N )
         port map (
             AltB => logic_result,
-            AltBu => zeros(n-2 downto 0) & AltBu,
+            AltBu => zeros(N-1 downto 1) & AltBu,
             logic_result => logic_result,
 				ShiftFN3 => ShiftFN3,
 				FuncClass => FuncClass,
