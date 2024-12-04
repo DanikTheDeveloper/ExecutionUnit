@@ -11,8 +11,8 @@ entity ExecUnit is
         ShiftFN      : in std_logic_vector(1 downto 0);    -- Shift function
         AddnSub      : in std_logic := '0';                -- Add/Sub control
         ExtWord      : in std_logic := '0';                -- Extend word control
-        Y            : out std_logic_vector(N-1 downto 0); -- Final result
-        Zero, AltB, AltBu : out std_logic  -- Flags
+        Y            : out std_logic_vector(N-1 downto 0) -- Final result
+        --Zero, AltB, AltBu : out std_logic  -- Flags
     );
 end entity ExecUnit;
 
@@ -20,12 +20,13 @@ architecture hierarchical of ExecUnit is
 
     -- Internal Signals
     signal arithmetic_result, shift_result, logic_result, updB : std_logic_vector(N-1 downto 0);
+    signal ShiftFN1, ShiftFN2, ShiftFN3 : std_logic_vector(N-1 downto 0);
 	 
 	 component AddnSub_entity is
         Generic ( N : natural := 64 );
         Port (
             A : in std_logic_vector(N-1 downto 0);
-				AddnSub      : in std_logic; 
+				AddnSub      : in std_logic;
             B : out std_logic_vector(N-1 downto 0)
         );
     end component;
@@ -42,15 +43,6 @@ architecture hierarchical of ExecUnit is
         );
     end component;
 
-    component Shifter is
-        Generic ( N : natural := 64 );
-        Port (
-            A, B : in std_logic_vector(N-1 downto 0);
-            Func : in std_logic_vector(1 downto 0);
-            Result : out std_logic_vector(N-1 downto 0)
-        );
-    end component;
-
     component LogicUnit is
         Generic ( N : natural := 64 );
         Port (
@@ -60,24 +52,63 @@ architecture hierarchical of ExecUnit is
         );
     end component;
 
-    -- Instantiate FlagsLogic for Zero, AltB, and AltBu
-    component FlagsLogic is
+    -- Instantiate the new FuncClass (MUX)
+    component FuncClass_entity is
         Generic ( N : natural := 64 );
-        Port ( 
-            arithmetic_result, shift_result, logic_result : in std_logic_vector(N-1 downto 0); 
-            Zero, AltB, AltBu : out std_logic
+        Port (
+            AltB, AltBu, logic_result, ShiftFN3 : in std_logic_vector(N-1 downto 0);
+            FuncClass : in std_logic_vector(1 downto 0);
+            Result : out std_logic_vector(N-1 downto 0)
         );
     end component;
 
-    -- Instantiate the new ResultSelector (MUX)
-    component ResultSelector is
+    -- Internal signals to hold shift results
+    signal sll_result, srl_result, sra_result : std_logic_vector(N-1 downto 0);
+    signal Bmask : std_logic_vector(6 downto 0);
+
+    component Mask is
         Generic ( N : natural := 64 );
         Port (
-            FuncClass : in std_logic_vector(1 downto 0);
-            arithmetic_result : in std_logic_vector(N-1 downto 0);
-            shift_result : in std_logic_vector(N-1 downto 0);
-            logic_result : in std_logic_vector(N-1 downto 0);
-            Y : out std_logic_vector(N-1 downto 0)
+            A : in std_logic_vector(N-1 downto 0);
+            B : out std_logic_vector(6 downto 0)
+        );
+    end component;
+	 
+    -- Declare components for instantiation
+    component sll_entity
+        Generic ( N : natural := 64 );
+        Port (
+            A     : in  std_logic_vector(N-1 downto 0);
+            B     : in  std_logic_vector(6 downto 0);
+            Result: out std_logic_vector(N-1 downto 0)
+        );
+    end component;
+
+    component srl_entity
+        Generic ( N : natural := 64 );
+        Port (
+            A     : in  std_logic_vector(N-1 downto 0);
+            B     : in  std_logic_vector(6 downto 0);
+            Result: out std_logic_vector(N-1 downto 0)
+        );
+    end component;
+
+    component sra_entity
+        Generic ( N : natural := 64 );
+        Port (
+            A     : in  std_logic_vector(N-1 downto 0);
+            B     : in  std_logic_vector(6 downto 0);
+            Result: out std_logic_vector(N-1 downto 0)
+        );
+    end component;
+
+    -- Shift selector instance
+    component ShiftSelector is
+        Generic ( N : natural := 64 );
+        Port (
+            A, B      : in std_logic_vector(N-1 downto 0);
+            ShiftFN : in std_logic;
+            Result  : out std_logic_vector(N-1 downto 0)
         );
     end component;
 
@@ -103,14 +134,52 @@ begin
         );
 
     -- Shift Block: Logical/Arithmetic shift based on ShiftFN control
-    Shifter_inst : Shifter
+    
+	
+    Mask_inst : Mask
         generic map ( N => N )
         port map (
-            A => A,
-            B => B,
-            Func => ShiftFN,
-            Result => shift_result
+            A => B,
+            B => Bmask
         );
+
+    -- Instantiate the components for the different shifts
+    sll_inst : sll_entity
+        port map (A => A, B => Bmask, Result => sll_result);
+
+    srl_inst : srl_entity
+        port map (A => A, B => Bmask, Result => srl_result);
+
+    sra_inst : sra_entity
+        port map (A => A, B => Bmask, Result => sra_result);
+
+    -- Instantiate the ShiftSelector for choosing the correct shift result
+    ShiftSelector1_inst : ShiftSelector
+        generic map ( N => N )
+        port map (
+            A => arithmetic_result,
+            B => sll_result,
+            ShiftFN => ShiftFN(0),
+            Result => ShiftFN1
+        );
+		  
+	ShiftSelector2_inst : ShiftSelector
+        generic map ( N => N )
+        port map (
+            A => srl_result,
+            B => sra_result,
+            ShiftFN => ShiftFN(0),
+            Result => ShiftFN2
+        );
+		  
+	ShiftSelector3_inst : ShiftSelector
+        generic map ( N => N )
+        port map (
+            A => ShiftFN1,
+            B => ShiftFN2,
+            ShiftFN => ShiftFN(1),
+            Result => ShiftFN3
+        );	
 
     -- Logic Block: AND/OR/XOR operations based on LogicFN control
     LogicUnit_inst : LogicUnit
@@ -122,27 +191,15 @@ begin
             Result => logic_result
         );
 
-    -- Instantiate FlagsLogic for flag handling
-    FlagsLogic_inst : FlagsLogic
+    FuncClass_inst : FuncClass_entity
         generic map ( N => N )
         port map (
-            arithmetic_result => arithmetic_result,
-            shift_result => shift_result,
+            AltB => logic_result,
+            AltBu => ShiftFN3,
             logic_result => logic_result,
-            Zero => Zero,
-            AltB => AltB,
-            AltBu => AltBu
-        );
-
-    -- Final output selection (using ResultSelector)
-    ResultSelector_inst : ResultSelector
-        generic map ( N => N )
-        port map (
-            FuncClass => FuncClass,
-            arithmetic_result => arithmetic_result,
-            shift_result => shift_result,
-            logic_result => logic_result,
-            Y => Y
+				ShiftFN3 => ShiftFN3,
+				FuncClass => FuncClass,
+				Result => Y
         );
 
 end architecture hierarchical;
