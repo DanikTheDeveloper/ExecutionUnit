@@ -75,7 +75,7 @@ architecture hierarchical of ExecUnit is
     end component;
 	 
     -- Declare components for instantiation
-    component sll_entity
+    component sll_222222
         Generic ( N : natural := 64 );
         Port (
             A     : in  std_logic_vector(N-1 downto 0);
@@ -84,7 +84,7 @@ architecture hierarchical of ExecUnit is
         );
     end component;
 
-    component srl_entity
+    component srl_222222
         Generic ( N : natural := 64 );
         Port (
             A     : in  std_logic_vector(N-1 downto 0);
@@ -93,7 +93,7 @@ architecture hierarchical of ExecUnit is
         );
     end component;
 
-    component sra_entity
+    component sra_222222
         Generic ( N : natural := 64 );
         Port (
             A     : in  std_logic_vector(N-1 downto 0);
@@ -144,13 +144,13 @@ begin
         );
 
     -- Instantiate the components for the different shifts
-    sll_inst : sll_entity
+    sll_inst : sll_222222
         port map (A => A, B => Bmask, Result => sll_result);
 
-    srl_inst : srl_entity
+    srl_inst : srl_222222
         port map (A => A, B => Bmask, Result => srl_result);
 
-    sra_inst : sra_entity
+    sra_inst : sra_222222
         port map (A => A, B => Bmask, Result => sra_result);
 
     -- Instantiate the ShiftSelector for choosing the correct shift result

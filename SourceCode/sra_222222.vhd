@@ -2,16 +2,16 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity sra_entity is
+entity sra_222222 is
     Generic ( N : natural := 64 );
     Port (
         A     : in  std_logic_vector(N-1 downto 0);
         B     : in  std_logic_vector(6 downto 0);
         Result: out std_logic_vector(N-1 downto 0)
     );
-end entity sra_entity;
+end entity sra_222222;
 
-architecture behavioral of sra_entity is
+architecture behavioral of sra_222222 is
     signal zeros : std_logic_vector(N-1 downto 0);
     signal ones : std_logic_vector(N-1 downto 0);
 begin

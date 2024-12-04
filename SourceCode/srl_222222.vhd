@@ -2,16 +2,16 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity sll_entity is
+entity srl_222222 is
     Generic ( N : natural := 64 );
     Port (
         A     : in  std_logic_vector(N-1 downto 0);
         B     : in  std_logic_vector(6 downto 0);
         Result: out std_logic_vector(N-1 downto 0)
     );
-end entity sll_entity;
+end entity srl_222222;
 
-architecture behavioral of sll_entity is
+architecture behavioral of srl_222222 is
     signal zeros : std_logic_vector(N-1 downto 0);
 begin
     zeros <= (others => '0');
@@ -25,7 +25,7 @@ begin
         for i in 6 downto 0 loop
             if B(i) = '1' then
                 -- Shift left: append zeros based on current bit position
-						temp := temp(N-1-i downto 0) & zeros(N-1 downto N-i);
+						temp := zeros(N-1 downto N-i) & temp(N-1 downto i);
             end if;
         end loop;
         
