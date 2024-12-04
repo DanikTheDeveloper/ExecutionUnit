@@ -16,16 +16,20 @@ begin
     process(A, B, Func)
     begin
         case Func is
-            -- AND operation
+            -- LUI operation
             when "00" => 
-                Result <= A and B;  -- Bitwise AND
-            -- OR operation
-            when "01" => 
-                Result <= A or B;   -- Bitwise OR
+                    Result(31 downto 0) <= A(19 downto 0) & x"000";  -- Concatenate with 12 zeros
+                    Result(63 downto 32) <= (others => Result(31));  -- Sign-extend bit 31 to 63 downto 32
             -- XOR operation
-            when "10" => 
-                Result <= A xor B;  -- Bitwise XOR
-            -- Default case (no operation or error handling)
+            when "01" => 
+                    Result <= A xor B;  -- Bitwise XOR
+            -- OR operation
+            when "10" =>
+                    Result <= A or B;   -- Bitwise OR
+                    -- AND operation
+                when "11" =>
+                    Result <= A and B;  -- Bitwise AND
+               -- Default case (no operation or error handling)
             when others => 
                 Result <= A;  -- Default case: all zeros
         end case;
