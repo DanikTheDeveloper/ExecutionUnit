@@ -19,7 +19,16 @@ end entity ExecUnit;
 architecture hierarchical of ExecUnit is
 
     -- Internal Signals
-    signal arithmetic_result, shift_result, logic_result : std_logic_vector(N-1 downto 0);
+    signal arithmetic_result, shift_result, logic_result, updB : std_logic_vector(N-1 downto 0);
+	 
+	 component AddnSub_entity is
+        Generic ( N : natural := 64 );
+        Port (
+            A : in std_logic_vector(N-1 downto 0);
+				AddnSub      : in std_logic; 
+            B : out std_logic_vector(N-1 downto 0)
+        );
+    end component;
 
     -- Component Declarations
     component Adder is
@@ -73,13 +82,20 @@ architecture hierarchical of ExecUnit is
     end component;
 
 begin
+    AddnSub_inst : AddnSub_entity
+        generic map ( N => N )
+        port map (
+            A => B,
+				AddnSub => AddnSub,
+            B => updB
+        );
 
     -- Arithmetic Block: Add/Sub operations based on FuncClass and AddnSub control
     Adder_inst : Adder
         generic map ( N => N )
         port map (
             A => A,
-            B => B,
+            B => updB,
             Cin => AddnSub,  -- AddnSub controls add (0) or subtract (1)
             S => arithmetic_result,
             Cout => open,     -- Carry-out (unused for now)

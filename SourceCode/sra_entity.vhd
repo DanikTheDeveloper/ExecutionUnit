@@ -27,8 +27,7 @@ begin
         for i in 6 downto 0 loop
 					 if B(i) = '1' and A(N-1) = '0' then
 						temp := zeros(N-1 downto N-i) & temp(N-1 downto i);
-					end if;
-					 if B(i) = '1' and A(N-1) = '1' then
+					elsif B(i) = '1' and A(N-1) = '1' then
 						temp := ones(N-1 downto N-i) & temp(N-1 downto i);
 					end if;
         end loop;
