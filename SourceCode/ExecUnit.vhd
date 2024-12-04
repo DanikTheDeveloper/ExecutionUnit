@@ -11,15 +11,15 @@ entity ExecUnit is
         ShiftFN      : in std_logic_vector(1 downto 0);    -- Shift function
         AddnSub      : in std_logic := '0';                -- Add/Sub control
         ExtWord      : in std_logic := '0';                -- Extend word control
-        Y            : out std_logic_vector(N-1 downto 0) -- Final result
-        --Zero, AltB, AltBu : out std_logic  -- Flags
+        Y            : out std_logic_vector(N-1 downto 0); -- Final result
+        AltBu, Zero : out std_logic  -- Flags, AltB, 
     );
 end entity ExecUnit;
 
 architecture hierarchical of ExecUnit is
 
     -- Internal Signals
-    signal arithmetic_result, shift_result, logic_result, updB : std_logic_vector(N-1 downto 0);
+    signal arithmetic_result, shift_result, logic_result, updB, zeros : std_logic_vector(N-1 downto 0);
     signal ShiftFN1, ShiftFN2, ShiftFN3 : std_logic_vector(N-1 downto 0);
 	 
 	 component AddnSub_entity is
@@ -111,14 +111,39 @@ architecture hierarchical of ExecUnit is
             Result  : out std_logic_vector(N-1 downto 0)
         );
     end component;
+	 
+    component MagComU is
+        Generic ( N : natural := 64 );
+        Port (
+			  A, B : in std_logic_vector(N-1 downto 0);
+			  LessThan, Equal    : out std_logic
+        );
+    end component;
 
+	 
+    component AndNotGate is
+        Generic ( N : natural := 64 );
+        Port (
+			  A : in std_logic_vector(N-1 downto 0);
+			  B    : out std_logic
+        );
+    end component;
 begin
+	zeros <= (others => '0');
     AddnSub_inst : AddnSub_entity
         generic map ( N => N )
         port map (
             A => B,
 				AddnSub => AddnSub,
             B => updB
+        );
+		  
+	MagComU_inst : MagComU
+        generic map ( N => N )
+        port map (
+            A => A,
+				B => B,
+            LessThan => AltBu
         );
 
     -- Arithmetic Block: Add/Sub operations based on FuncClass and AddnSub control
@@ -134,7 +159,12 @@ begin
         );
 
     -- Shift Block: Logical/Arithmetic shift based on ShiftFN control
-    
+    AndNotGate_inst : AndNotGate
+        generic map ( N => N )
+        port map (
+            A => arithmetic_result,
+            B => Zero
+        );
 	
     Mask_inst : Mask
         generic map ( N => N )
@@ -195,7 +225,7 @@ begin
         generic map ( N => N )
         port map (
             AltB => logic_result,
-            AltBu => ShiftFN3,
+            AltBu => zeros(n-2 downto 0) & AltBu,
             logic_result => logic_result,
 				ShiftFN3 => ShiftFN3,
 				FuncClass => FuncClass,
