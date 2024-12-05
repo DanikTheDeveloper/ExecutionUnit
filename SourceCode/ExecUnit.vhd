@@ -20,7 +20,18 @@ architecture hierarchical of ExecUnit is
 
     -- Internal Signals
     signal arithmetic_result, shift_result, logic_result, updB, zeros : std_logic_vector(N-1 downto 0);
-    signal ShiftFN1, ShiftFN2, ShiftFN3 : std_logic_vector(N-1 downto 0);
+    signal ShiftFN1, ShiftFN2, ShiftFN3, ShiftFN4, ShiftFN5 : std_logic_vector(N-1 downto 0);
+    signal sll_result, srl_result, sra_result : std_logic_vector(N-1 downto 0);
+    signal Bmask : std_logic_vector(6 downto 0);
+	 
+	 component ExtWord_entity is
+        Generic ( N : natural := 64 );
+		 Port (
+					A      : in std_logic_vector(N-1 downto 0);
+					ExtWord, upper : in std_logic;
+					Result  : out std_logic_vector(N-1 downto 0)
+		 );
+    end component;
 	 
 	 component AddnSub_entity is
         Generic ( N : natural := 64 );
@@ -61,10 +72,6 @@ architecture hierarchical of ExecUnit is
             Result : out std_logic_vector(N-1 downto 0)
         );
     end component;
-
-    -- Internal signals to hold shift results
-    signal sll_result, srl_result, sra_result : std_logic_vector(N-1 downto 0);
-    signal Bmask : std_logic_vector(6 downto 0);
 
     component Mask is
         Generic ( N : natural := 64 );
@@ -195,6 +202,15 @@ begin
             Result => ShiftFN1
         );
 		  
+		Ext_inst1 : ExtWord_entity
+        generic map ( N => N )
+        port map (
+            A => ShiftFN1,
+            ExtWord => ExtWord,
+				upper => '0',
+            Result => ShiftFN4
+        );
+		  
 	ShiftSelector2_inst : ShiftSelector
         generic map ( N => N )
         port map (
@@ -204,11 +220,20 @@ begin
             Result => ShiftFN2
         );
 		  
+	Ext_inst2 : ExtWord_entity
+        generic map ( N => N )
+        port map (
+            A => ShiftFN2,
+            ExtWord => ExtWord,
+				upper => '1',
+            Result => ShiftFN5
+        );
+		  
 	ShiftSelector3_inst : ShiftSelector
         generic map ( N => N )
         port map (
-            A => ShiftFN1,
-            B => ShiftFN2,
+            A => ShiftFN4,
+            B => ShiftFN5,
             ShiftFN => ShiftFN(1),
             Result => ShiftFN3
         );	
