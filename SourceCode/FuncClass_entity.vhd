@@ -15,13 +15,13 @@ architecture behavioral of FuncClass_entity is
 begin
     process(FuncClass, AltB, AltBu, logic_result, ShiftFN3)
     begin
-        if FuncClass = "00" then
+        if FuncClass = "10" then
             Result <= AltB;
-        elsif FuncClass = "01" then
-            Result <= AltBu;
-        elsif FuncClass = "10" then
-            Result <= logic_result;
         elsif FuncClass = "11" then
+            Result <= AltBu;
+        elsif FuncClass = "01" then
+            Result <= logic_result;
+        elsif FuncClass = "00" then
             Result <= ShiftFN3;
         end if;
     end process;

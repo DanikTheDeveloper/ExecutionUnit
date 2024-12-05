@@ -12,10 +12,7 @@ entity sll_222222 is
 end entity sll_222222;
 
 architecture behavioral of sll_222222 is
-    signal zeros : std_logic_vector(N-1 downto 0);
 begin
-    zeros <= (others => '0');
-
     process(A)
         variable temp : std_logic_vector(N-1 downto 0);
     begin
@@ -25,7 +22,7 @@ begin
         for i in 6 downto 0 loop
             if B(i) = '1' then
                 -- Shift left: append zeros based on current bit position
-						temp := temp(N-1-i downto 0) & zeros(N-1 downto N-i);
+						temp := std_logic_vector(shift_left(unsigned(A), 2**i));
             end if;
         end loop;
         
