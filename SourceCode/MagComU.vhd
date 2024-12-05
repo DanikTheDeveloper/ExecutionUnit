@@ -28,7 +28,7 @@ End Generate Recur;
 	
 STOP:	if N = 1 generate
 							ALessThanB <= not A(0) and B(0);
-							AEqualB <= A(0) and B(0);
+							AEqualB <= A(0) xor B(0);
 End Generate Stop;
 
 							

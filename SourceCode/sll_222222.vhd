@@ -22,7 +22,7 @@ begin
         
         for i in 6 downto 0 loop
             if B(i) = '1' then
-						temp := zeros(N-1-(2**i) downto 2**i) & A(2**i-1 downto 0);
+						temp := A(N-1-(2**i) downto 0) & zeros(2**i-1 downto 0);
             end if;
         end loop;
         
