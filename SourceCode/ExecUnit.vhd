@@ -20,7 +20,8 @@ architecture hierarchical of ExecUnit is
 
     -- Internal Signals
     signal arithmetic_result, shift_result, logic_result, updB, zeros : std_logic_vector(N-1 downto 0);
-    signal ShiftFN1, ShiftFN2, ShiftFN3 : std_logic_vector(N-1 downto 0);
+    signal addSignExt : std_logic_vector(31 downto 0);
+    signal ShiftFN1, ShiftFN2, ShiftFN3, ShiftFN4, ShiftFN1_32, ShiftFN2_32, ShiftFN3_32 : std_logic_vector(N-1 downto 0);
 	 
 	 component AddnSub_entity is
         Generic ( N : natural := 64 );
@@ -63,7 +64,7 @@ architecture hierarchical of ExecUnit is
     end component;
 
     -- Internal signals to hold shift results
-    signal sll_result, srl_result, sra_result : std_logic_vector(N-1 downto 0);
+    signal sll_result, srl_result, sra_result, sll_result_32, srl_result_32, sra_result_32 : std_logic_vector(N-1 downto 0);
     signal Bmask : std_logic_vector(6 downto 0);
 
     component Mask is
@@ -94,6 +95,34 @@ architecture hierarchical of ExecUnit is
     end component;
 
     component sra_222222
+        Generic ( N : natural := 64 );
+        Port (
+            A     : in  std_logic_vector(N-1 downto 0);
+            B     : in  std_logic_vector(6 downto 0);
+            Result: out std_logic_vector(N-1 downto 0)
+        );
+    end component;
+	 
+    -- Declare components for instantiation
+    component sll_222222_32
+        Generic ( N : natural := 64 );
+        Port (
+            A     : in  std_logic_vector(N-1 downto 0);
+            B     : in  std_logic_vector(6 downto 0);
+            Result: out std_logic_vector(N-1 downto 0)
+        );
+    end component;
+
+    component srl_222222_32
+        Generic ( N : natural := 64 );
+        Port (
+            A     : in  std_logic_vector(N-1 downto 0);
+            B     : in  std_logic_vector(6 downto 0);
+            Result: out std_logic_vector(N-1 downto 0)
+        );
+    end component;
+
+    component sra_222222_32
         Generic ( N : natural := 64 );
         Port (
             A     : in  std_logic_vector(N-1 downto 0);
@@ -184,6 +213,16 @@ begin
 
     sra_inst : sra_222222
         port map (A => A, B => Bmask, Result => sra_result);
+		  
+	-- Instantiate the components for the different shifts
+    sll_inst_32 : sll_222222_32
+        port map (A => A, B => Bmask, Result => sll_result_32);
+
+    srl_inst_32 : srl_222222_32
+        port map (A => A, B => Bmask, Result => srl_result_32);
+
+    sra_inst_32 : sra_222222_32
+        port map (A => A, B => Bmask, Result => sra_result_32);
 
     -- Instantiate the ShiftSelector for choosing the correct shift result
     ShiftSelector1_inst : ShiftSelector
@@ -213,6 +252,44 @@ begin
             Result => ShiftFN3
         );	
 
+		  addSignExt <= (others => arithmetic_result(31));
+    -- Instantiate the ShiftSelector for choosing the correct shift result
+    ShiftSelector1_inst_32 : ShiftSelector
+        generic map ( N => N )
+        port map (
+            A => addSignExt & arithmetic_result(31 downto 0),
+            B => sll_result_32,
+            ShiftFN => ShiftFN(0),
+            Result => ShiftFN1_32
+        );
+		  
+	ShiftSelector2_inst_32 : ShiftSelector
+        generic map ( N => N )
+        port map (
+            A => srl_result_32,
+            B => sra_result_32,
+            ShiftFN => ShiftFN(0),
+            Result => ShiftFN2_32
+        );
+		  
+	ShiftSelector3_inst_32 : ShiftSelector
+        generic map ( N => N )
+        port map (
+            A => ShiftFN1_32,
+            B => ShiftFN2_32,
+            ShiftFN => ShiftFN(1),
+            Result => ShiftFN3_32
+        );
+		  
+		ExtWord_inst_32 : ShiftSelector
+        generic map ( N => N )
+        port map (
+            A => ShiftFN3,
+            B => ShiftFN3_32,
+            ShiftFN => ExtWord,
+            Result => ShiftFN4
+        );
+
     -- Logic Block: AND/OR/XOR operations based on LogicFN control
     LogicUnit_inst : LogicUnit
         generic map ( N => N )
@@ -229,7 +306,7 @@ begin
             AltB => zeros(N-1 downto 1) & AltB,
             AltBu => zeros(N-1 downto 1) & AltBu,
             logic_result => logic_result,
-				ShiftFN3 => ShiftFN3,
+				ShiftFN3 => ShiftFN4,
 				FuncClass => FuncClass,
 				Result => Y
         );
