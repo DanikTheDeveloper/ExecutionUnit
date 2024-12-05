@@ -127,13 +127,6 @@ architecture Candidate222222A of ExecUnit is
         );
     end component;
 	 
-    component AndNotGate is
-        Generic ( N : natural := 64 );
-        Port (
-			  A : in std_logic_vector(N-1 downto 0);
-			  B    : out std_logic
-        );
-    end component;
 begin
 	zeros <= (others => '0');
     AddnSub_inst : AddnSub_entity
@@ -152,7 +145,7 @@ begin
             ALessThanB => AltB,
 				AEqualB => open,
             ALessThanBU => AltBu,
-				AEqualBU => open
+				AEqualBU => zero
         );
 
     -- Arithmetic Block: Add/Sub operations based on FuncClass and AddnSub control
@@ -168,13 +161,6 @@ begin
         );
 
     -- Shift Block: Logical/Arithmetic shift based on ShiftFN control
-    AndNotGate_inst : AndNotGate
-        generic map ( N => N )
-        port map (
-            A => arithmetic_result,
-            B => Zero
-        );
-	
     Mask_inst : Mask
         generic map ( N => N )
         port map (
@@ -394,13 +380,6 @@ architecture Candidate222222B of ExecUnit is
         );
     end component;
 	 
-    component AndNotGate is
-        Generic ( N : natural := 64 );
-        Port (
-			  A : in std_logic_vector(N-1 downto 0);
-			  B    : out std_logic
-        );
-    end component;
 begin
 	zeros <= (others => '0');
     AddnSub_inst : AddnSub_entity
@@ -419,7 +398,7 @@ begin
             ALessThanB => AltB,
 				AEqualB => open,
             ALessThanBU => AltBu,
-				AEqualBU => open
+				AEqualBU => Zero
         );
 
     -- Arithmetic Block: Add/Sub operations based on FuncClass and AddnSub control
@@ -432,14 +411,6 @@ begin
             S => arithmetic_result,
             Cout => open,     -- Carry-out (unused for now)
             Ovfl => open      -- Overflow (unused for now)
-        );
-
-    -- Shift Block: Logical/Arithmetic shift based on ShiftFN control
-    AndNotGate_inst : AndNotGate
-        generic map ( N => N )
-        port map (
-            A => arithmetic_result,
-            B => Zero
         );
 	
     Mask_inst : Mask
