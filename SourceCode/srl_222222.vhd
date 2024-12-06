@@ -13,17 +13,17 @@ end entity srl_222222;
 
 architecture behavioral of srl_222222 is
 begin
-    process(A, B)
+    process(A, B)  -- Trigger on changes to A or B
         variable temp : unsigned(N-1 downto 0);  -- Use unsigned for arithmetic operations
-        variable shift_amount : integer;        -- Shift amount as an integer
+        variable shift_amount : integer;         -- Calculate the total shift amount
     begin
         -- Convert inputs
         temp := unsigned(A);  -- Convert A to unsigned
-        shift_amount := to_integer(unsigned(B));  -- Convert B to an integer
+        shift_amount := to_integer(unsigned(B));  -- Convert B to integer
 
-        -- Perform the shift
+        -- Perform the right shift
         if shift_amount < N then
-            temp := shift_right(temp, shift_amount);  -- Perform left shift
+            temp := shift_right(temp, shift_amount);  -- Logical right shift
         else
             temp := (others => '0');  -- If shift exceeds width, output all zeros
         end if;

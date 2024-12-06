@@ -14,18 +14,19 @@ end entity sra_222222;
 architecture behavioral of sra_222222 is
 begin
     process(A, B)
-        variable temp : signed(N-1 downto 0);  -- Use unsigned for arithmetic operations
-        variable shift_amount : integer;        -- Shift amount as an integer
+        variable temp : signed(N-1 downto 0);  -- Use signed for arithmetic operations
+        variable shift_amount : integer;       -- Shift amount as an integer
     begin
         -- Convert inputs
-        temp := signed(A);  -- Convert A to unsigned
+        temp := signed(A);  -- Convert A to signed
         shift_amount := to_integer(unsigned(B));  -- Convert B to an integer
 
-        -- Perform the shift
+        -- Perform the arithmetic shift
         if shift_amount < N then
-            temp := shift_right(temp, shift_amount);  -- Perform left shift
+            temp := shift_right(temp, shift_amount);  -- Perform arithmetic right shift
         else
-            temp := (others => '0');  -- If shift exceeds width, output all zeros
+            -- Propagate the MSB for large shifts
+            temp := (others => temp(N-1));  -- All bits become the MSB (sign bit)
         end if;
 
         -- Assign the result back to the output
