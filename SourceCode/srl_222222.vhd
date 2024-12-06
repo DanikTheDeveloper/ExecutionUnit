@@ -12,21 +12,29 @@ entity srl_222222 is
 end entity srl_222222;
 
 architecture behavioral of srl_222222 is
+    signal temp, temp1, temp2, temp3, temp4, temp5, temp6, temp7 : std_logic_vector(N-1 downto 0);
 begin
-    process(A)
-        variable temp : std_logic_vector(N-1 downto 0);
-    begin
-        -- Initialize temp to A
-        temp := A;
-        
-        for i in 6 downto 0 loop
-            if B(i) = '1' then
-                -- Shift left: append zeros based on current bit position
-						temp := std_logic_vector(shift_right(unsigned(temp), 2**i));
-            end if;
-        end loop;
-        
-        -- After the loop, assign temp to Atemp signal
-        Result <= temp;
-    end process;
+    -- Define shifts explicitly based on B
+    temp1(0 to N-1) <= A when B(0) = '0' else
+                      std_logic_vector(shift_right(unsigned(A), 64));
+    
+    temp2(0 to N-1) <= temp1 when B(1) = '0' else
+                      std_logic_vector(shift_right(unsigned(temp1), 32));
+    
+    temp4(0 to N-1) <= temp3 when B(2) = '0' else
+                      std_logic_vector(shift_right(unsigned(temp3), 16));
+    
+    temp5(0 to N-1) <= temp4 when B(3) = '0' else
+                      std_logic_vector(shift_right(unsigned(temp4), 8));
+    
+    temp6(0 to N-1) <= temp5 when B(4) = '0' else
+                      std_logic_vector(shift_right(unsigned(temp5), 4));
+    
+    temp7(0 to N-1) <= temp6 when B(5) = '0' else
+                      std_logic_vector(shift_right(unsigned(temp6), 2));
+    
+    temp(0 to N-1) <= temp7 when B(6) = '0' else
+                      std_logic_vector(shift_right(unsigned(temp7), 1));
+
+    Result <= temp;
 end architecture behavioral;
