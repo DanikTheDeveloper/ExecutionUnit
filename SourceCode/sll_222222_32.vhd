@@ -24,7 +24,7 @@ begin
         for i in 5 downto 0 loop
             if B(i) = '1' then
                 -- Shift left: append zeros based on current bit position
-						temp := zeros & std_logic_vector(shift_left(unsigned(A(31 downto 0)), 2**i));
+						temp := zeros & std_logic_vector(shift_left(unsigned(temp(31 downto 0)), 2**i));
             end if;
         end loop;
         
