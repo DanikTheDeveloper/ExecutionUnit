@@ -14,12 +14,12 @@ end entity sra_222222;
 architecture behavioral of sra_222222 is
 begin
     process(A, B)
-        variable temp : unsigned(N-1 downto 0);  -- Use unsigned for arithmetic operations
+        variable temp : signed(N-1 downto 0);  -- Use unsigned for arithmetic operations
         variable shift_amount : integer;        -- Shift amount as an integer
     begin
         -- Convert inputs
-        temp := unsigned(A);  -- Convert A to unsigned
-        shift_amount := to_integer(signed(B));  -- Convert B to an integer
+        temp := signed(A);  -- Convert A to unsigned
+        shift_amount := to_integer(unsigned(B));  -- Convert B to an integer
 
         -- Perform the shift
         if shift_amount < N then
